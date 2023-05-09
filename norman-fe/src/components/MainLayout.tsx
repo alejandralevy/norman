@@ -1,4 +1,4 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import styled from "styled-components";
@@ -36,6 +36,7 @@ const MainLayout = () => {
           }}
         >
           Content
+          <Button>Button</Button>
         </Content>
       </Layout>
     </AppLayout>

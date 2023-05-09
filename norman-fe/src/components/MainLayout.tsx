@@ -1,10 +1,11 @@
-import React from "react";
-import { Layout, Sider, Menu } from "antd";
+import { Layout, Menu } from "antd";
+import { Content } from "antd/es/layout/layout";
+import Sider from "antd/es/layout/Sider";
 
 const MainLayout = () => {
   return (
     <Layout>
-      <Sider trigger={null} collapsible lapsed>
+      <Sider trigger={null} collapsible>
         <Menu
           theme='dark'
           mode='inline'
@@ -26,7 +27,7 @@ const MainLayout = () => {
         />
       </Sider>
       <Layout>
-        {/* <Content
+        <Content
           style={{
             margin: "24px 16px",
             padding: 24,
@@ -34,7 +35,7 @@ const MainLayout = () => {
           }}
         >
           Content
-        </Content> */}
+        </Content>
       </Layout>
     </Layout>
   );

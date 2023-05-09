@@ -1,10 +1,11 @@
 import { Layout, Menu } from "antd";
 import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
+import styled from "styled-components";
 
 const MainLayout = () => {
   return (
-    <Layout>
+    <AppLayout>
       <Sider trigger={null} collapsible>
         <Menu
           theme='dark'
@@ -37,8 +38,12 @@ const MainLayout = () => {
           Content
         </Content>
       </Layout>
-    </Layout>
+    </AppLayout>
   );
 };
+
+const AppLayout = styled(Layout)`
+  height: 100vh;
+`;
 
 export default MainLayout;

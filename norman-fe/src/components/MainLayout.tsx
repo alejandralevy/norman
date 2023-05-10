@@ -6,10 +6,9 @@ import styled from "styled-components";
 const MainLayout = () => {
   return (
     <AppLayout>
-      <Sider trigger={null} collapsible>
+      <Sider collapsible trigger={null} width="300">
+        <Button>New chat</Button>
         <Menu
-          theme='dark'
-          mode='inline'
           defaultSelectedKeys={["1"]}
           items={[
             {
@@ -25,6 +24,8 @@ const MainLayout = () => {
               label: "nav 3",
             },
           ]}
+          mode="inline"
+          theme="dark"
         />
       </Sider>
       <Layout>

@@ -1,80 +1,62 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Collapse, Form, Input, Select } from "antd";
+import { Collapse } from "antd";
 import styled from "styled-components";
+import { blue } from "@ant-design/colors";
 
-const EditBot = () => {
-  return (
-    <div>
-      <Form
-        autoComplete="off"
-        initialValues={{ remember: true }}
-        labelCol={{ span: 8 }}
-        name="basic"
-        style={{ maxWidth: 600 }}
-        wrapperCol={{ span: 16 }}
-      >
-        <Form.Item
-          label="Name"
-          name="Name"
-          rules={[{ required: true, message: "Please input the name!" }]}
-        >
-          <Input />
-        </Form.Item>
+import Bot from "../types/Bot";
 
-        <Form.Item label="Description" name="Description">
-          <Input />
-        </Form.Item>
-
-        <Form.Item label="Model">
-          <Select>
-            <Select.Option value="demo">GPT-3.5</Select.Option>
-            <Select.Option value="demo">GPT-4</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button htmlType="submit" type="primary">
-            Save
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
-  );
-};
+import CollapseButtons from "./CollapseButtons";
+import EditBot from "./EditBot";
 
 const CustomCollapse = ({
-  id,
-  name,
+  bot,
+  selectedBot,
+  editingBot,
   selectBot,
+  editBot,
 }: {
-  id: string;
-  name: string;
-  selectBot: (bot: string) => void;
+  bot: Bot;
+  selectedBot?: string;
+  editingBot?: string;
+  selectBot: () => void;
+  editBot: () => void;
 }) => {
   return (
     <Collapse
-      key={id}
+      key={bot.id}
+      activeKey={editingBot}
       bordered={false}
-      expandIcon={() => <EditOutlined style={{ fontSize: "16px" }} />}
       expandIconPosition="end"
+      style={{
+        borderRadius: 0,
+      }}
     >
       <CustomPanel
-        key={id}
+        key={bot.id}
         collapsible="icon"
-        extra={<DeleteOutlined />}
-        header={name}
-        showArrow={true}
-        onClick={() => selectBot(name)}
+        extra={<CollapseButtons edit={() => editBot()} />}
+        header={bot.name}
+        isSelected={bot.id === selectedBot}
+        showArrow={false}
+        onClick={() => selectBot()}
       >
-        <EditBot />
+        <EditBot bot={bot} />
       </CustomPanel>
     </Collapse>
   );
 };
 
-const CustomPanel = styled(Collapse.Panel)`
+interface CustomPanelProps {
+  isSelected: boolean;
+}
+
+const CustomPanel = styled(Collapse.Panel)<CustomPanelProps>`
   margin-bottom: 1rem;
+  ${(props: CustomPanelProps) => (props.isSelected ? `background: ${blue[9]}` : "")};
   border: none;
+  &:hover,
+  &:focus {
+    background: ${blue[9]};
+  }
 `;
 
 export default CustomCollapse;

@@ -4,11 +4,38 @@ import styled from "styled-components";
 import { PlusOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
+import Bot from "../types/Bot";
+
 import ContentChat from "./ContentChat";
 import CustomCollapse from "./CustomCollapse";
 
+const bots: Bot[] = [
+  { id: "1", name: "Bot 1", model: "GPT-4" },
+  { id: "2", name: "Bot 2", model: "GPT-3.5" },
+  { id: "3", name: "Bot 3", model: "GPT-4" },
+];
+
 const MainLayout = () => {
-  let [bot, setBot] = useState("Home");
+  let [selectedBot, setSelectedBot] = useState<Bot>();
+  let [editingBot, setEditingBot] = useState<Bot>();
+
+  function editBot(bot: Bot) {
+    if (bot.id !== editingBot?.id) {
+      setEditingBot(bot);
+      setSelectedBot(bot);
+    } else if (bot.id === editingBot?.id) {
+      setEditingBot(undefined);
+    } else {
+      setEditingBot(bot);
+    }
+  }
+
+  function selectBot(bot: Bot) {
+    setSelectedBot(bot);
+    if (bot?.id !== editingBot?.id) {
+      setEditingBot(undefined);
+    }
+  }
 
   return (
     <AppLayout>
@@ -16,13 +43,19 @@ const MainLayout = () => {
         <Box>
           <Button icon={<PlusOutlined />}>New chat</Button>
         </Box>
-        {/* <p style={{ color: "white", textAlign: "center" }}>Your chats list</p> */}
-        <CustomCollapse id="1" name="Bot 1" selectBot={() => setBot("Bot 1")} />
-        <CustomCollapse id="2" name="Bot 2" selectBot={() => setBot("Bot 2")} />
-        <CustomCollapse id="3" name="Bot 3" selectBot={() => setBot("Bot 3")} />
+        {bots.map((bot) => (
+          <CustomCollapse
+            key={bot.id}
+            bot={bot}
+            editBot={() => editBot(bot)}
+            editingBot={editingBot?.id}
+            selectBot={() => selectBot(bot)}
+            selectedBot={selectedBot?.id}
+          />
+        ))}
       </Sider>
       <Layout>
-        <ContentChat botName={bot} />
+        <ContentChat botName={selectedBot?.name ?? "Home"} />
       </Layout>
     </AppLayout>
   );

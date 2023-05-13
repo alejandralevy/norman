@@ -10,8 +10,6 @@ const EditBot = ({ bot }: { bot: Bot }) => {
         initialValues={{ remember: true }}
         labelCol={{ span: 8 }}
         name="basic"
-        style={{ maxWidth: 600 }}
-        wrapperCol={{ span: 16 }}
       >
         <Form.Item
           initialValue={bot.name}
@@ -22,7 +20,11 @@ const EditBot = ({ bot }: { bot: Bot }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item initialValue={bot.description} label="Description" name="Description">
+        <Form.Item
+          initialValue={bot.description}
+          label="Description"
+          name="Description"
+        >
           <Input />
         </Form.Item>
 
@@ -33,9 +35,12 @@ const EditBot = ({ bot }: { bot: Bot }) => {
           </Select>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item style={{ display: "flex", justifyContent: "center" }}>
           <Button htmlType="submit" type="primary">
             Save
+          </Button>
+          <Button htmlType="submit" type="secondary">
+            Cancel
           </Button>
         </Form.Item>
       </Form>

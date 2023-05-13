@@ -9,16 +9,16 @@ import EditBot from "./EditBot";
 
 const CustomCollapse = ({
   bot,
-  selectedBot,
   editingBot,
   selectBot,
   editBot,
+  isSelected,
 }: {
   bot: Bot;
-  selectedBot?: string;
   editingBot?: string;
   selectBot: () => void;
   editBot: () => void;
+  isSelected: boolean;
 }) => {
   return (
     <Collapse
@@ -33,9 +33,9 @@ const CustomCollapse = ({
       <CustomPanel
         key={bot.id}
         collapsible="icon"
-        extra={<CollapseButtons edit={() => editBot()} />}
+        extra={isSelected && <CollapseButtons edit={() => editBot()} />}
         header={bot.name}
-        isSelected={bot.id === selectedBot}
+        isSelected={isSelected}
         showArrow={false}
         onClick={() => selectBot()}
       >

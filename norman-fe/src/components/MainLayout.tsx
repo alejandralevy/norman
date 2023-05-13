@@ -50,7 +50,7 @@ const MainLayout = () => {
             editBot={() => editBot(bot)}
             editingBot={editingBot?.id}
             selectBot={() => selectBot(bot)}
-            selectedBot={selectedBot?.id}
+            isSelected={selectedBot?.id === bot.id}
           />
         ))}
       </Sider>

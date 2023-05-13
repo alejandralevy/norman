@@ -6,8 +6,8 @@ import { useState } from "react";
 
 import Bot from "../types/Bot";
 
-import ContentChat from "./ContentChat";
-import CustomCollapse from "./CustomCollapse";
+import ContentChat from "../components/ContentChat";
+import CustomCollapse from "../components/CustomCollapse";
 
 const bots: Bot[] = [
   { id: "1", name: "Bot 1", model: "GPT-4" },
@@ -15,7 +15,7 @@ const bots: Bot[] = [
   { id: "3", name: "Bot 3", model: "GPT-4" },
 ];
 
-const MainLayout = () => {
+const BotsMessages = () => {
   let [selectedBot, setSelectedBot] = useState<Bot>();
   let [editingBot, setEditingBot] = useState<Bot>();
 
@@ -72,4 +72,4 @@ const Box = styled.div`
   padding: 1rem;
 `;
 
-export default MainLayout;
+export default BotsMessages;

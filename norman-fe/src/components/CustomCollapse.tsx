@@ -5,14 +5,14 @@ import { blue } from "@ant-design/colors";
 import Bot from "../types/Bot";
 
 import CollapseButtons from "./CollapseButtons";
-import EditBot from "./EditBot";
+import EditBot from "./EditBotForm";
 
 const CustomCollapse = ({
   bot,
   editingBot,
   selectBot,
   editBot,
-  isSelected,
+  isSelected = false,
 }: {
   bot: Bot;
   editingBot?: string;
@@ -32,10 +32,10 @@ const CustomCollapse = ({
     >
       <CustomPanel
         key={bot.id}
+        $isSelected={isSelected}
         collapsible="icon"
         extra={isSelected && <CollapseButtons edit={() => editBot()} />}
         header={bot.name}
-        isSelected={isSelected}
         showArrow={false}
         onClick={() => selectBot()}
       >
@@ -46,12 +46,13 @@ const CustomCollapse = ({
 };
 
 interface CustomPanelProps {
-  isSelected: boolean;
+  $isSelected: boolean;
+  onClick: () => void;
 }
 
 const CustomPanel = styled(Collapse.Panel)<CustomPanelProps>`
   margin-bottom: 1rem;
-  ${(props: CustomPanelProps) => (props.isSelected ? `background: ${blue[9]}` : "")};
+  ${(props: CustomPanelProps) => (props.$isSelected ? `background: ${blue[9]}` : "")};
   border: none;
   &:hover,
   &:focus {

@@ -33,13 +33,13 @@ const CustomCollapse = ({
       <CustomPanel
         key={bot.id}
         collapsible="icon"
-        extra={isSelected && <CollapseButtons edit={() => editBot()} />}
+        extra={isSelected && <CollapseButtons edit={editBot} />}
         header={bot.name}
         isSelected={isSelected}
         showArrow={false}
-        onClick={() => selectBot()}
+        onClick={selectBot}
       >
-        <EditBot bot={bot} />
+        <EditBot bot={bot} onCancelEdit={editBot}/>
       </CustomPanel>
     </Collapse>
   );

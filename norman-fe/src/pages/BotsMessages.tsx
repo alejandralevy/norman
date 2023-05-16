@@ -20,6 +20,7 @@ const BotsMessages = () => {
   let [editingBot, setEditingBot] = useState<Bot>();
 
   function editBot(bot: Bot) {
+    debugger;
     if (bot.id !== editingBot?.id) {
       setEditingBot(bot);
       setSelectedBot(bot);
@@ -55,7 +56,7 @@ const BotsMessages = () => {
         ))}
       </Sider>
       <Layout>
-        <ContentChat botName={selectedBot?.name ?? "Home"} />
+        <ContentChat botName={selectedBot?.name} />
       </Layout>
     </AppLayout>
   );

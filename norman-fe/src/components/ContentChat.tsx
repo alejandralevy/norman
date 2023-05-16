@@ -1,4 +1,5 @@
 import { Content } from "antd/es/layout/layout";
+import NoBotSelected from "./NoBotSelected";
 
 const ContentChat = ({ botName }: { botName: string | undefined }) => {
   return (
@@ -15,10 +16,9 @@ const ContentChat = ({ botName }: { botName: string | undefined }) => {
           justifyContent: "center",
           alignItems: "center",
           color: "blue",
-          fontSize: "10rem",
         }}
       >
-        {botName}
+        {!botName ? <NoBotSelected/> : botName}
       </div>
     </Content>
   );

@@ -32,6 +32,7 @@ const BotsMessages = () => {
 
 const AppLayout = styled(Layout)`
   height: 100vh;
+  overflow: hidden;
 `;
 
 export default BotsMessages;

@@ -37,7 +37,7 @@ const CreateBotForm = ({ closeAction }: { closeAction: () => void }) => {
 
         <Form.Item>
           <CreateButtonContainer>
-            <Button htmlType="submit" icon={<PlusOutlined />}>
+            <Button htmlType="submit" type="primary" icon={<PlusOutlined />}>
               Create new chat
             </Button>
           </CreateButtonContainer>

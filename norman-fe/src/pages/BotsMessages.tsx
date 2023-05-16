@@ -17,9 +17,9 @@ const bots: Bot[] = [
 const BotsMessages = () => {
   let [selectedBot, setSelectedBot] = useState<Bot>();
   let [editingBot, setEditingBot] = useState<Bot>();
+  const [collapsed, setCollapsed] = useState(false);
 
   function editBot(bot: Bot) {
-    debugger;
     if (bot.id !== editingBot?.id) {
       setEditingBot(bot);
       setSelectedBot(bot);
@@ -38,8 +38,13 @@ const BotsMessages = () => {
   }
 
   return (
-    <AppLayout>
-      <Sider collapsible trigger={null} width="300">
+    <AppLayout hasSider>
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+        width="300"
+      >
         <CreateNewChatButton />
         <BotList>
           {bots.map((bot) => (

@@ -5,54 +5,17 @@ import { useState } from "react";
 
 import Bot from "../types/Bot";
 import ContentChat from "../components/ContentChat";
-import CustomCollapse from "../components/CustomCollapse";
 import CreateNewChatButton from "../components/CreateNewChatButton";
-
-const bots: Bot[] = [
-  { id: "1", name: "Bot 1", model: "GPT-4" },
-  { id: "2", name: "Bot 2", model: "GPT-3.5" },
-  { id: "3", name: "Bot 3", model: "GPT-4" },
-];
+import BotList from "../components/BotList";
 
 const BotsMessages = () => {
-  let [selectedBot, setSelectedBot] = useState<Bot>();
-  let [editingBot, setEditingBot] = useState<Bot>();
-
-  function editBot(bot: Bot) {
-    debugger;
-    if (bot.id !== editingBot?.id) {
-      setEditingBot(bot);
-      setSelectedBot(bot);
-    } else if (bot.id === editingBot?.id) {
-      setEditingBot(undefined);
-    } else {
-      setEditingBot(bot);
-    }
-  }
-
-  function selectBot(bot: Bot) {
-    setSelectedBot(bot);
-    if (bot?.id !== editingBot?.id) {
-      setEditingBot(undefined);
-    }
-  }
+  const [selectedBot, setSelectedBot] = useState<Bot>();
 
   return (
     <AppLayout>
       <Sider collapsible trigger={null} width="300">
         <CreateNewChatButton />
-        <BotList>
-          {bots.map((bot) => (
-            <CustomCollapse
-              key={bot.id}
-              bot={bot}
-              editBot={() => editBot(bot)}
-              editingBot={editingBot?.id}
-              isSelected={selectedBot?.id === bot.id}
-              selectBot={() => selectBot(bot)}
-            />
-          ))}
-        </BotList>
+        <BotList selectedBot={selectedBot} setSelectedBot={setSelectedBot} />
       </Sider>
       <Layout>
         <ContentChat botName={selectedBot?.name} />
@@ -63,10 +26,6 @@ const BotsMessages = () => {
 
 const AppLayout = styled(Layout)`
   height: 100vh;
-`;
-
-const BotList = styled.div`
-  margin-top: 1rem;
 `;
 
 export default BotsMessages;

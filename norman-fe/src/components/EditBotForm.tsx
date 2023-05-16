@@ -2,15 +2,15 @@ import { Button, Form, Input, Select } from "antd";
 
 import Bot from "../types/Bot";
 
-const EditBotForm = ({ bot, onCancelEdit }: { bot: Bot, onCancelEdit: () => void }) => {
+const EditBotForm = ({ bot, onCancelEdit }: { bot: Bot; onCancelEdit: () => void }) => {
   return (
     <div>
       <Form
         autoComplete="off"
         initialValues={{ remember: true }}
         labelCol={{ span: 8 }}
-        name="basic"
         layout="vertical"
+        name="basic"
       >
         <Form.Item
           initialValue={bot.name}

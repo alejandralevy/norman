@@ -27,7 +27,7 @@ const CreateNewChatButton = () => {
           $isActive={isActive}
           header={
             <Box $isActive={isActive}>
-              <Button icon={<PlusOutlined />}>New chat</Button>
+              <Button icon={<PlusOutlined />} type="primary">New chat</Button>
             </Box>
           }
           showArrow={false}

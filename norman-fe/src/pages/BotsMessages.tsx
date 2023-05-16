@@ -10,10 +10,16 @@ import BotList from "../components/BotList";
 
 const BotsMessages = () => {
   const [selectedBot, setSelectedBot] = useState<Bot>();
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <AppLayout>
-      <Sider collapsible trigger={null} width="300">
+    <AppLayout hasSider>
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        width="300"
+        onCollapse={(value) => setCollapsed(value)}
+      >
         <CreateNewChatButton />
         <BotList selectedBot={selectedBot} setSelectedBot={setSelectedBot} />
       </Sider>

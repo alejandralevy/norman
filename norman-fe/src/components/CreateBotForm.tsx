@@ -61,7 +61,7 @@ const CreateBotForm = ({ closeAction }: { closeAction: () => void }) => {
             {isLoading ? (
               <Spin />
             ) : (
-              <Button htmlType="submit" icon={<PlusOutlined />}>
+              <Button htmlType="submit" icon={<PlusOutlined />} type="primary">
                 Create new chat
               </Button>
             )}

@@ -106,6 +106,8 @@ async def get_messages_endpoint(bot_id: int, db: Session = Depends(get_async_db)
     # TODO: support pagination
     try:
         messages = get_messages_by_bot_id(db=db, bot_id=bot_id)
+        for m in messages:
+            lt = Message.from_orm(m).dict()
         return [Message.from_orm(message).dict() for message in messages]
     except Exception as e:
         print("Error:", e)
@@ -138,8 +140,6 @@ async def create_message_endpoint(bot_id: int, request: Request, db: Session = D
             messages=messages,
             max_tokens=bot.default_response_tokens
         )
-
-        print("interaction:", interaction_response)
 
         # Create an interaction schema
         interaction_in = InteractionCreate(

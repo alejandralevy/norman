@@ -1,13 +1,12 @@
-import { Layout, Button } from "antd";
+import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
 import styled from "styled-components";
-import { PlusOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 import Bot from "../types/Bot";
-
 import ContentChat from "../components/ContentChat";
 import CustomCollapse from "../components/CustomCollapse";
+import CreateNewChatButton from "../components/CreateNewChatButton";
 
 const bots: Bot[] = [
   { id: "1", name: "Bot 1", model: "GPT-4" },
@@ -41,19 +40,19 @@ const BotsMessages = () => {
   return (
     <AppLayout>
       <Sider collapsible trigger={null} width="300">
-        <Box>
-          <Button icon={<PlusOutlined />}>New chat</Button>
-        </Box>
-        {bots.map((bot) => (
-          <CustomCollapse
-            key={bot.id}
-            bot={bot}
-            editBot={() => editBot(bot)}
-            editingBot={editingBot?.id}
-            selectBot={() => selectBot(bot)}
-            isSelected={selectedBot?.id === bot.id}
-          />
-        ))}
+        <CreateNewChatButton />
+        <BotList>
+          {bots.map((bot) => (
+            <CustomCollapse
+              key={bot.id}
+              bot={bot}
+              editBot={() => editBot(bot)}
+              editingBot={editingBot?.id}
+              isSelected={selectedBot?.id === bot.id}
+              selectBot={() => selectBot(bot)}
+            />
+          ))}
+        </BotList>
       </Sider>
       <Layout>
         <ContentChat botName={selectedBot?.name} />
@@ -66,11 +65,8 @@ const AppLayout = styled(Layout)`
   height: 100vh;
 `;
 
-const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1rem;
+const BotList = styled.div`
+  margin-top: 1rem;
 `;
 
 export default BotsMessages;

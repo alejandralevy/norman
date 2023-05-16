@@ -2,7 +2,7 @@ import { Button, Form, Input, Select } from "antd";
 
 import Bot from "../types/Bot";
 
-const EditBot = ({ bot, onCancelEdit }: { bot: Bot, onCancelEdit: () => void }) => {
+const EditBotForm = ({ bot, onCancelEdit }: { bot: Bot, onCancelEdit: () => void }) => {
   return (
     <div>
       <Form
@@ -21,11 +21,7 @@ const EditBot = ({ bot, onCancelEdit }: { bot: Bot, onCancelEdit: () => void }) 
           <Input />
         </Form.Item>
 
-        <Form.Item
-          initialValue={bot.description}
-          label="Description"
-          name="Description"
-        >
+        <Form.Item initialValue={bot.description} label="Description" name="Description">
           <Input />
         </Form.Item>
 
@@ -49,4 +45,4 @@ const EditBot = ({ bot, onCancelEdit }: { bot: Bot, onCancelEdit: () => void }) 
   );
 };
 
-export default EditBot;
+export default EditBotForm;

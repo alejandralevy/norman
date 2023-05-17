@@ -24,7 +24,7 @@ const BotsMessages = () => {
         <BotList selectedBot={selectedBot} setSelectedBot={setSelectedBot} />
       </Sider>
       <Layout>
-        <ContentChat botName={selectedBot?.name} />
+        <ContentChat bot={selectedBot} />
       </Layout>
     </AppLayout>
   );

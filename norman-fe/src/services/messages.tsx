@@ -7,7 +7,7 @@ const KEY = "Messages";
 export const useMutateMessage = (botId: string) => {
   const queryClient = useQueryClient();
 
-  return useMutation(() => newMessage(botId), {
+  return useMutation((message) => newMessage(botId, message), {
     onSuccess: () => {
       queryClient.invalidateQueries([KEY]);
     },

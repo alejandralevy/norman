@@ -9,9 +9,14 @@ import Message from "../types/Message";
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   const messages = useMessage(bot.id);
   const sendMessage = useMutateMessage(bot.id);
+  const [form] = Form.useForm();
 
   function submitHandler(message: any) {
-    sendMessage.mutate(message);
+    sendMessage.mutate(message, {
+      onSuccess: () => {
+        form.resetFields();
+      },
+    });
   }
 
   if (messages.isLoading) {
@@ -27,7 +32,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
       {messages.data.map((message: Message) => {
         return <MessageBox key={message.id}>{message.text}</MessageBox>;
       })}
-      <CustomForm onFinish={submitHandler}>
+      <CustomForm form={form} onFinish={submitHandler}>
         <Form.Item
           label=""
           name="content"
@@ -38,7 +43,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
         </Form.Item>
         <Form.Item>
           {sendMessage.isLoading ? (
-            <Button htmlType="submit" type="primary">
+            <Button type="primary">
               <Spin />
             </Button>
           ) : (
@@ -48,9 +53,6 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
           )}
         </Form.Item>
         {sendMessage.isError && <div style={{ color: "red" }}>Something failed</div>}
-        {sendMessage.data?.status === "error" && (
-          <div style={{ color: "red" }}>Something failed</div>
-        )}
       </CustomForm>
     </div>
   );

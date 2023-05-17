@@ -8,8 +8,8 @@ export const getMessages = async (botId: string) => {
   return data;
 };
 
-export const newMessage = async (botId: string) => {
-  const { data } = await axios.post(`${API_URL}/api/bots/${botId}/messages`);
+export const newMessage = async (botId: string, message: any) => {
+  const { data } = await axios.post(`${API_URL}/api/bots/${botId}/messages`, message);
 
   return data;
 };

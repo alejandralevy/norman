@@ -31,13 +31,6 @@ function App() {
               colorBorder: "#5F91DC",
               boxShadow: "0 0px 0 #5F91DC",
             },
-            Collapse: {
-              colorBgContainer: "#4a00fa",
-              colorBgLayout: "#4a00fa",
-              colorPrimary: "#4a00fa",
-              colorBgBase: "#4a00fa",
-              colorBgTextHover: "#4a00fa",
-            },
           },
         }}
       >

@@ -2,7 +2,6 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Collapse } from "antd";
 import { styled } from "styled-components";
 import { useState } from "react";
-import { blue } from "@ant-design/colors";
 
 import CreateBotForm from "./CreateBotForm";
 
@@ -18,7 +17,7 @@ const CreateNewChatButton = () => {
         expandIconPosition="end"
         style={{
           borderRadius: 0,
-          background: "#00000000",
+          background: "#081426",
         }}
         onChange={(actives) => setIsActive(actives.length > 0)}
       >
@@ -27,7 +26,9 @@ const CreateNewChatButton = () => {
           $isActive={isActive}
           header={
             <Box $isActive={isActive}>
-              <Button icon={<PlusOutlined />} type="primary">New chat</Button>
+              <Button icon={<PlusOutlined />} type="primary">
+                New chat
+              </Button>
             </Box>
           }
           showArrow={false}
@@ -47,10 +48,12 @@ const Box = styled.div<BoxProps>`
   ${(props: BoxProps) => (props.$isActive ? `display: none` : `display: flex`)};
   flex-direction: column;
   justify-content: center;
+  padding: 4px;
 `;
 
 const CustomPanel = styled(Collapse.Panel)<BoxProps>`
-  ${(props: BoxProps) => (props.$isActive ? `background: ${blue[8]}` : "")};
+  ${(props: BoxProps) => (props.$isActive ? `background: #0d203d` : "")};
+  padding: 0;
 `;
 
 export default CreateNewChatButton;

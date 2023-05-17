@@ -1,6 +1,5 @@
 import { Collapse } from "antd";
 import styled from "styled-components";
-import { blue } from "@ant-design/colors";
 
 import Bot from "../types/Bot";
 

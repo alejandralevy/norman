@@ -31,6 +31,7 @@ const CreateBotForm = ({ closeAction }: { closeAction: () => void }) => {
       <Form
         autoComplete="off"
         form={form}
+        layout="vertical"
         initialValues={{ remember: true }}
         labelCol={{ span: 8 }}
         name="basic"
@@ -81,7 +82,6 @@ const CreateButtonContainer = styled.div`
 const CancelButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1rem;
 `;
 
 export default CreateBotForm;

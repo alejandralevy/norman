@@ -1,5 +1,4 @@
-import React from "react";
-import { Button, Col, Row, Typography } from "antd";
+import { Typography } from "antd";
 import { styled } from "styled-components";
 
 const NoBotSelected = () => {
@@ -9,12 +8,13 @@ const NoBotSelected = () => {
     <>
       <Container>
         <MiddleDiv>
-          <Title level={1}>Hello there, this is norman</Title>
+          <Title level={1}>Hello there, this is Norman!</Title>
           <Text>Use this space to communicate something about the project</Text>
         </MiddleDiv>
         <BottomDiv>
-          <Text>To start a conversation, please select a bot or</Text>
-          <Button type="primary">Create a new bot</Button>
+          <Text>
+            To start a conversation, please select a bot or create a new one.
+          </Text>
         </BottomDiv>
       </Container>
     </>

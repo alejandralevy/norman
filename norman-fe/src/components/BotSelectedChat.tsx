@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 import Bot from "../types/Bot";
 import { useMessage, useMutateMessage } from "../services/messages";
 import Message from "../types/Message";
+import TextArea from "antd/es/input/TextArea";
 
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   const messages = useMessage(bot.id);
@@ -33,13 +34,13 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
         return <MessageBox key={message.id}>{message.text}</MessageBox>;
       })}
       <CustomForm form={form} onFinish={submitHandler}>
-        <Form.Item
-          label=""
-          name="content"
-          rules={[{ required: true, message: "Please input the message" }]}
-          style={{ flexGrow: 1 }}
-        >
-          <Input placeholder="Write your message" />
+        <Form.Item label="" name="content" style={{ flexGrow: 1 }}>
+          <TextArea
+            placeholder="Write your message"
+            size="large"
+            autoSize={{ minRows: 1, maxRows: 4 }}
+            onPressEnter={(event) => submitHandler(event.target?.value)}
+          />
         </Form.Item>
         <Form.Item>
           {sendMessage.isLoading ? (
@@ -52,7 +53,9 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
             </Button>
           )}
         </Form.Item>
-        {sendMessage.isError && <div style={{ color: "red" }}>Something failed</div>}
+        {sendMessage.isError && (
+          <div style={{ color: "red" }}>Something failed</div>
+        )}
       </CustomForm>
     </div>
   );
@@ -62,10 +65,11 @@ const CustomForm = styled(Form)`
   width: 100%;
   margin-bottom: 0;
   margin-top: auto;
-  padding: 0 5rem 0 5rem;
+  padding: 0 2rem 0 2rem;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  column-gap: 1rem;
+  align-items: center;
 `;
 
 const MessageBox = styled.div`

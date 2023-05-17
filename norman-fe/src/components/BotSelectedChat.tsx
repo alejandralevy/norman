@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
 
@@ -7,39 +7,50 @@ import { useMessage, useMutateMessage } from "../services/messages";
 import Message from "../types/Message";
 
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {
-  const { data, isError, isLoading } = useMessage(bot.id);
-  const { mutate } = useMutateMessage(bot.id);
+  const messages = useMessage(bot.id);
+  const sendMessage = useMutateMessage(bot.id);
 
   function submitHandler(message: any) {
-    mutate(message);
+    sendMessage.mutate(message);
   }
 
-  if (isLoading) {
+  if (messages.isLoading) {
     return <>Error</>;
   }
 
-  if (isError) {
+  if (messages.isError) {
     return <>Error</>;
   }
 
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-      {data.map((message: Message) => {
+      {messages.data.map((message: Message) => {
         return <MessageBox key={message.id}>{message.text}</MessageBox>;
       })}
       <CustomForm onFinish={submitHandler}>
         <Form.Item
-          label="Message"
+          label=""
           name="content"
-          rules={[{ required: true, message: "Please input the message!" }]}
+          rules={[{ required: true, message: "Please input the message" }]}
+          style={{ flexGrow: 1 }}
         >
-          <Input />
+          <Input placeholder="Write your message" />
         </Form.Item>
-        <Form.Item style={{ display: "flex", justifyContent: "center" }}>
-          <Button htmlType="submit" icon={<SendOutlined />} type="primary">
-            Send
-          </Button>
+        <Form.Item>
+          {sendMessage.isLoading ? (
+            <Button htmlType="submit" type="primary">
+              <Spin />
+            </Button>
+          ) : (
+            <Button htmlType="submit" icon={<SendOutlined />} type="primary">
+              Send
+            </Button>
+          )}
         </Form.Item>
+        {sendMessage.isError && <div style={{ color: "red" }}>Something failed</div>}
+        {sendMessage.data?.status === "error" && (
+          <div style={{ color: "red" }}>Something failed</div>
+        )}
       </CustomForm>
     </div>
   );
@@ -50,6 +61,9 @@ const CustomForm = styled(Form)`
   margin-bottom: 0;
   margin-top: auto;
   padding: 0 5rem 0 5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 `;
 
 const MessageBox = styled.div`

@@ -17,19 +17,18 @@ function App() {
           token: {
             colorPrimary: "#5F91DC",
             colorPrimaryBg: "#5F91DC",
-            colorBgLayout: "#27252a",
+            colorBgLayout: "#222327",
             boxShadow: "0 2px 0 #5F91DC",
           },
           components: {
             Layout: {
-              colorBgHeader: "#081426",
+              colorBgHeader: "#000",
             },
             Button: {
               colorBgBase: "#5F91DC",
               colorPrimary: "#5F91DC",
               colorPrimaryBg: "#5F91DC",
               colorBorder: "#5F91DC",
-              boxShadow: "0 0px 0 #5F91DC",
             },
           },
         }}

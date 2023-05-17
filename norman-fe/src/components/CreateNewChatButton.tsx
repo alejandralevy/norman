@@ -17,7 +17,7 @@ const CreateNewChatButton = () => {
         expandIconPosition="end"
         style={{
           borderRadius: 0,
-          background: "#081426",
+          background: "#000",
         }}
         onChange={(actives) => setIsActive(actives.length > 0)}
       >
@@ -52,7 +52,7 @@ const Box = styled.div<BoxProps>`
 `;
 
 const CustomPanel = styled(Collapse.Panel)<BoxProps>`
-  ${(props: BoxProps) => (props.$isActive ? `background: #0d203d` : "")};
+  ${(props: BoxProps) => (props.$isActive ? `background: #141414` : "")};
   padding: 0;
 `;
 

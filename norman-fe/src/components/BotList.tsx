@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useBots } from "../services/bots";
 import CustomCollapse from "../components/CustomCollapse";
 import Bot from "../types/Bot";
+import Loader from "./Loader";
 
 const BotList = ({
   selectedBot,
@@ -38,11 +39,18 @@ const BotList = ({
   }
 
   if (isLoading) {
-    return <>Loading</>;
+    return <Loader text="Loading bots..." />;
   }
 
   return (
-    <div style={{ marginTop: "1rem", overflow: "auto", height: "100%", paddingBottom: "3rem" }}>
+    <div
+      style={{
+        marginTop: "1rem",
+        overflow: "auto",
+        height: "100%",
+        paddingBottom: "3rem",
+      }}
+    >
       {data.map((bot: Bot) => (
         <CustomCollapse
           key={bot.id}

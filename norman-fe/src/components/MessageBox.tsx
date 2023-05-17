@@ -16,11 +16,13 @@ interface MessageBoxProps {
 const MessageContainer = styled.div<MessageBoxProps>`
   color: white;
   margin-top: 1rem;
-  padding: 1rem 5rem 1rem 5rem;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 16px;
+  margin: 12px;
   ${(props: MessageBoxProps) =>
     props.message.source === "user"
-      ? `background: #0d203d`
-      : "background: #364152"};
+      ? `background: #141414`
+      : "background: #2c2f34"};
 `;
 
 export default MessageBox;

@@ -41,7 +41,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
           <TextArea
             placeholder="Write your message"
             size="large"
-            autoSize={{ minRows: 1, maxRows: 4 }}
+            autoSize={{ minRows: 2, maxRows: 4 }}
             onPressEnter={(event) => submitHandler(event.target?.value)}
           />
         </Form.Item>
@@ -51,9 +51,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
               <Spin />
             </Button>
           ) : (
-            <Button htmlType="submit" icon={<SendOutlined />} type="primary">
-              Send
-            </Button>
+            <Button htmlType="submit" icon={<SendOutlined />} type="link" />
           )}
         </Form.Item>
         {sendMessage.isError && (
@@ -68,7 +66,7 @@ const CustomForm = styled(Form)`
   width: 100%;
   margin-bottom: 0;
   margin-top: auto;
-  padding: 0 2rem 0 2rem;
+  padding: 0 12px 0 12px;
   display: flex;
   flex-direction: row;
   column-gap: 1rem;

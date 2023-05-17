@@ -52,11 +52,11 @@ interface CustomPanelProps {
 const CustomPanel = styled(Collapse.Panel)<CustomPanelProps>`
   margin-bottom: 1rem;
   ${(props: CustomPanelProps) =>
-    props.$isSelected ? `background: #0d203d` : ""};
+    props.$isSelected ? `background: #141414` : ""};
   border: none;
   &:hover,
   &:focus {
-    background: #0d203d};
+    background: #141414};
   }
 `;
 

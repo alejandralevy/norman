@@ -42,7 +42,7 @@ const BotList = ({
   }
 
   return (
-    <div style={{ marginTop: "1rem" }}>
+    <div style={{ marginTop: "1rem", overflow: "auto", height: "100%", paddingBottom: "3rem" }}>
       {data.map((bot: Bot) => (
         <CustomCollapse
           key={bot.id}

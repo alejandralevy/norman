@@ -1,15 +1,18 @@
 import { Content } from "antd/es/layout/layout";
-import Bot from "../types/Bot";
-import NoBotSelected from "./NoBotSelected";
 
-const ContentChat = ({ bot }: { botName: Bot | undefined }) => {
+import Bot from "../types/Bot";
+
+import NoBotSelected from "./NoBotSelected";
+import BotSelectedChat from "./BotSelectedChat";
+
+const ContentChat = ({ bot }: { bot: Bot | undefined }) => {
   return (
     <Content
       style={{
         minHeight: 280,
       }}
     >
-      <div>{!bot?.botName ? <NoBotSelected /> : bot?.botName}</div>
+      {!bot ? <NoBotSelected /> : <BotSelectedChat bot={bot} />}
     </Content>
   );
 };

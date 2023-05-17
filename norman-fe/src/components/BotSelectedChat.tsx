@@ -6,6 +6,7 @@ import Bot from "../types/Bot";
 import { useMessage, useMutateMessage } from "../services/messages";
 import Message from "../types/Message";
 import TextArea from "antd/es/input/TextArea";
+import MessageBox from "./MessageBox";
 
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   const messages = useMessage(bot.id);
@@ -29,9 +30,11 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   }
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <MessagesContainer
+      style={{ height: "100%", display: "flex", flexDirection: "column" }}
+    >
       {messages.data.map((message: Message) => {
-        return <MessageBox key={message.id}>{message.text}</MessageBox>;
+        return <MessageBox message={message} />;
       })}
       <CustomForm form={form} onFinish={submitHandler}>
         <Form.Item label="" name="content" style={{ flexGrow: 1 }}>
@@ -57,7 +60,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
           <div style={{ color: "red" }}>Something failed</div>
         )}
       </CustomForm>
-    </div>
+    </MessagesContainer>
   );
 };
 
@@ -72,11 +75,10 @@ const CustomForm = styled(Form)`
   align-items: center;
 `;
 
-const MessageBox = styled.div`
-  color: white;
-  margin-top: 1rem;
-  padding: 1rem 5rem 1rem 5rem;
-  background: gray;
+const MessagesContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flexdirection: column;
 `;
 
 export default BotSelectedChat;

@@ -2,7 +2,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Select, Spin } from "antd";
 import { styled } from "styled-components";
 
-import { useMutateBots } from "../services/bots";
+import { useMutateBots } from "../../services/bots";
 
 const CreateBotForm = ({ closeAction }: { closeAction: () => void }) => {
   const { mutate, isError, isLoading } = useMutateBots();

@@ -1,9 +1,9 @@
 import { Typography } from "antd";
 import { styled } from "styled-components";
 
-import Bot from "../types/Bot";
-import { useMessage } from "../services/messages";
-import Message from "../types/Message";
+import Bot from "../../types/Bot";
+import { useMessage } from "../../services/messages";
+import Message from "../../types/Message";
 
 import MessageBox from "./MessageBox";
 import SubmitMessageForm from "./SubmitMessageForm";

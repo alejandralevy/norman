@@ -1,7 +1,7 @@
 import { Collapse } from "antd";
 import styled from "styled-components";
 
-import Bot from "../types/Bot";
+import Bot from "../../types/Bot";
 
 import CollapseButtons from "./CollapseButtons";
 import EditBot from "./EditBotForm";

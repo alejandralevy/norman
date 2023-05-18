@@ -1,10 +1,10 @@
 import TextArea from "antd/es/input/TextArea";
 import React from "react";
-import { Button, Form, Input, Spin, Typography } from "antd";
+import { Button, Form, Spin } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
-import { useMutateMessage } from "../services/messages";
-import Bot from "../types/Bot";
+import { useMutateMessage } from "../../services/messages";
+import Bot from "../../types/Bot";
 
 interface SubmitMessageFormProps {
   bot: Bot;

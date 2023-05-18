@@ -1,6 +1,6 @@
 import { Button, Form, Input, Select } from "antd";
 
-import Bot from "../types/Bot";
+import Bot from "../../types/Bot";
 
 const EditBotForm = ({ bot, onCancelEdit }: { bot: Bot; onCancelEdit: () => void }) => {
   return (

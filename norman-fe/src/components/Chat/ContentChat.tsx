@@ -1,6 +1,6 @@
 import { Content } from "antd/es/layout/layout";
 
-import Bot from "../types/Bot";
+import Bot from "../../types/Bot";
 
 import NoBotSelected from "./NoBotSelected";
 import BotSelectedChat from "./BotSelectedChat";

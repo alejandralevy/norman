@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { useBots } from "../services/bots";
-import CustomCollapse from "../components/CustomCollapse";
-import Bot from "../types/Bot";
-import Loader from "./Loader";
+import { useBots } from "../../services/bots";
+import CustomCollapse from "./CustomCollapse";
+import Bot from "../../types/Bot";
+import Loader from "../Common/Loader";
 
 const BotList = ({
   selectedBot,

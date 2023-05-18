@@ -3,8 +3,8 @@ import ReactMarkdown from "react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
 // import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { styled } from "styled-components";
-import Message from "../types/Message";
-import dracula from "../styles/dracula";
+import Message from "../../types/Message";
+import dracula from "../../styles/dracula";
 
 const MessageBox: React.FC<MessageBoxProps> = ({ message }) => {
   const codeStyles: { [key: string]: CSSProperties } = {

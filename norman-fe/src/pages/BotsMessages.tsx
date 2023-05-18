@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Bot from "../types/Bot";
-import ContentChat from "../components/ContentChat";
-import CreateNewChatButton from "../components/CreateNewChatButton";
-import BotList from "../components/BotList";
+import ContentChat from "../components/Chat/ContentChat";
+import CreateNewChatButton from "../components/Sider/CreateNewChatButton";
+import BotList from "../components/Sider/BotList";
 
 const BotsMessages = () => {
   const [selectedBot, setSelectedBot] = useState<Bot>();

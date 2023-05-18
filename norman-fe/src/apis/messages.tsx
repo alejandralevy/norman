@@ -9,7 +9,6 @@ export const getMessages = async (botId: string) => {
 };
 
 export const newMessage = async (botId: string, message: any) => {
-  debugger;
   const { data } = await axios.post(`${API_URL}/api/bots/${botId}/messages`, {
     content: message,
   });

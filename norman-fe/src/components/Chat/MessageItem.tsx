@@ -45,7 +45,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ message, loading }) => {
 };
 
 interface MessageBoxProps {
-  message: Message;
+  message: Pick<Message, "id" | "text" | "source">;
   loading?: boolean;
 }
 

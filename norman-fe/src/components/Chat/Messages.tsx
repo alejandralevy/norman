@@ -1,6 +1,7 @@
 import { Alert, Form, Skeleton, Typography } from "antd";
 import { styled } from "styled-components";
 import { useEffect, useRef } from "react";
+import lodash from "lodash";
 
 import Bot from "../../types/Bot";
 import { useMessage, useMutateMessage } from "../../services/messages";
@@ -60,7 +61,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
     <ChatPanel>
       <MessagesContent ref={messagesContainer}>
         {messages.data.length || sendMessage.isLoading
-          ? messages.data.map((message: Message) => {
+          ? lodash.sortBy(messages.data, "created_at").map((message: Message) => {
               return <MessageBox key={message.id} message={message} />;
             })
           : getEmptyMesages()}

@@ -5,7 +5,7 @@ import Bot from "../../types/Bot";
 import { useMessage } from "../../services/messages";
 import Message from "../../types/Message";
 
-import MessageBox from "./MessageBox";
+import MessageBox from "./MessageItem";
 import SubmitMessageForm from "./SubmitMessageForm";
 import { useEffect, useRef } from "react";
 

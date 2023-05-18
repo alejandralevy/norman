@@ -4,19 +4,14 @@ import { Button, Form, Spin } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
 
-import { useMutateMessage } from "../../services/messages";
-import Bot from "../../types/Bot";
-
 interface SubmitMessageFormProps {
-  bot: Bot;
+  sendMessage: any;
+  form: any;
 }
 
-const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ bot }) => {
-  const sendMessage = useMutateMessage(bot.id);
-  const [form] = Form.useForm();
-
+const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ sendMessage, form }) => {
   function submitHandler(message: any) {
-    sendMessage.mutate(message, {
+    sendMessage.mutate(message.content, {
       onSuccess: () => {
         form.resetFields();
       },
@@ -28,9 +23,10 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ bot }) => {
       <Form.Item label="" name="content" style={{ flexGrow: 1, marginBottom: 0 }}>
         <TextArea
           autoSize={{ minRows: 2, maxRows: 4 }}
+          disabled={sendMessage.isLoading}
           placeholder="Write your message"
           size="large"
-          onPressEnter={(event) => submitHandler(event.target?.value)}
+          onPressEnter={() => form.submit()}
         />
       </Form.Item>
       <Form.Item style={{ marginBottom: 0, display: "flex", alignItems: "center" }}>

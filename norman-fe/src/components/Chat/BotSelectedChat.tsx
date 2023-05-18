@@ -1,8 +1,9 @@
-import { Typography } from "antd";
+import { Alert, Form, Skeleton, Typography } from "antd";
 import { styled } from "styled-components";
+import { useEffect, useRef } from "react";
 
 import Bot from "../../types/Bot";
-import { useMessage } from "../../services/messages";
+import { useMessage, useMutateMessage } from "../../services/messages";
 import Message from "../../types/Message";
 
 import MessageBox from "./MessageBox";
@@ -10,14 +11,36 @@ import SubmitMessageForm from "./SubmitMessageForm";
 
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   const messages = useMessage(bot.id);
+  const messagesContainer = useRef<HTMLDivElement>(null);
+  const sendMessage = useMutateMessage(bot.id);
+  const [form] = Form.useForm();
+
   const { Title, Text } = Typography;
 
+  useEffect(() => {
+    messagesContainer.current?.scrollTo(0, messagesContainer.current?.scrollHeight);
+  }, [messages.data, sendMessage.isLoading]);
+
   if (messages.isLoading) {
-    return <>Error</>;
+    return (
+      <MessagesContent>
+        <Skeleton active style={{ padding: "1rem 1rem 0rem 1rem" }} />;
+        <Skeleton active style={{ padding: "1rem 1rem 0rem 1rem" }} />;
+        <Skeleton active style={{ padding: "1rem 1rem 0rem 1rem" }} />;
+      </MessagesContent>
+    );
   }
 
   if (messages.isError) {
-    return <>Error</>;
+    return (
+      <Alert
+        showIcon
+        description="There was an error, please retry."
+        message="Opps!"
+        style={{ margin: "2rem" }}
+        type="error"
+      />
+    );
   }
 
   const getEmptyMesages = () => {
@@ -35,14 +58,33 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
 
   return (
     <ChatPanel>
-      <MessagesContent>
-        {messages.data.length
+      <MessagesContent ref={messagesContainer}>
+        {messages.data.length || sendMessage.isLoading
           ? messages.data.map((message: Message) => {
-              return <MessageBox message={message} />;
+              return <MessageBox key={message.id} message={message} />;
             })
           : getEmptyMesages()}
+        {sendMessage.isLoading && (
+          <>
+            <MessageBox
+              message={{
+                text: sendMessage.variables,
+                id: -2,
+                source: "user",
+              }}
+            />
+            <MessageBox
+              loading
+              message={{
+                text: "",
+                id: -1,
+                source: "bot",
+              }}
+            />
+          </>
+        )}
       </MessagesContent>
-      <SubmitMessageForm bot={bot} />
+      <SubmitMessageForm form={form} sendMessage={sendMessage} />
     </ChatPanel>
   );
 };

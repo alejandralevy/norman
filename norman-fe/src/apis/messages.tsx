@@ -9,7 +9,10 @@ export const getMessages = async (botId: string) => {
 };
 
 export const newMessage = async (botId: string, message: any) => {
-  const { data } = await axios.post(`${API_URL}/api/bots/${botId}/messages`, message);
+  debugger;
+  const { data } = await axios.post(`${API_URL}/api/bots/${botId}/messages`, {
+    content: message,
+  });
 
   return data;
 };

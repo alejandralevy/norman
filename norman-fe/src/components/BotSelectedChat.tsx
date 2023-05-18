@@ -30,14 +30,18 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   }
 
   return (
-    <MessagesContainer
-      style={{ height: "100%", display: "flex", flexDirection: "column" }}
-    >
-      {messages.data.map((message: Message) => {
-        return <MessageBox message={message} />;
-      })}
+    <MessagesContainer>
+      <MessagesContent>
+        {messages.data.map((message: Message) => {
+          return <MessageBox message={message} />;
+        })}
+      </MessagesContent>
       <CustomForm form={form} onFinish={submitHandler}>
-        <Form.Item label="" name="content" style={{ flexGrow: 1 }}>
+        <Form.Item
+          label=""
+          name="content"
+          style={{ flexGrow: 1, marginBottom: 0 }}
+        >
           <TextArea
             placeholder="Write your message"
             size="large"
@@ -45,13 +49,20 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
             onPressEnter={(event) => submitHandler(event.target?.value)}
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          style={{ marginBottom: 0, display: "flex", alignItems: "center" }}
+        >
           {sendMessage.isLoading ? (
-            <Button type="primary">
+            <Button type="primary" style={{ marginBottom: 0 }}>
               <Spin />
             </Button>
           ) : (
-            <Button htmlType="submit" icon={<SendOutlined />} type="link" />
+            <Button
+              htmlType="submit"
+              icon={<SendOutlined />}
+              type="link"
+              style={{ marginBottom: 0 }}
+            />
           )}
         </Form.Item>
         {sendMessage.isError && (
@@ -64,19 +75,23 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
 
 const CustomForm = styled(Form)`
   width: 100%;
-  margin-bottom: 0;
-  margin-top: auto;
-  padding: 0 12px 0 12px;
+  padding: 4px 32px 32px 32px;
   display: flex;
   flex-direction: row;
   column-gap: 1rem;
   align-items: center;
+  box-shadow: 0px 0px 32px 32px #222327;
 `;
 
 const MessagesContainer = styled.div`
   height: 100%;
   display: flex;
-  flexdirection: column;
+  flex-direction: column;
 `;
+
+const MessagesContent = styled.div`
+  overflow: scroll;
+`;
+
 
 export default BotSelectedChat;

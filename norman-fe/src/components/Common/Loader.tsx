@@ -1,5 +1,5 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import { Col, Row, Spin, Typography } from "antd";
+import { Spin, Typography } from "antd";
 import React from "react";
 import styled from "styled-components";
 
@@ -8,8 +8,9 @@ interface LoaderProps {
 }
 
 const Loader: React.FC<LoaderProps> = ({ text }) => {
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  const antIcon = <LoadingOutlined spin style={{ fontSize: 24 }} />;
   const { Text } = Typography;
+
   return (
     <LoaderContainer>
       <Spin indicator={antIcon} />

@@ -3,6 +3,7 @@ import React from "react";
 import { Button, Form, Spin } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
+
 import { useMutateMessage } from "../../services/messages";
 import Bot from "../../types/Bot";
 
@@ -13,6 +14,7 @@ interface SubmitMessageFormProps {
 const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ bot }) => {
   const sendMessage = useMutateMessage(bot.id);
   const [form] = Form.useForm();
+
   function submitHandler(message: any) {
     sendMessage.mutate(message, {
       onSuccess: () => {
@@ -20,39 +22,32 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ bot }) => {
       },
     });
   }
+
   return (
     <CustomForm form={form} onFinish={submitHandler}>
-      <Form.Item
-        label=""
-        name="content"
-        style={{ flexGrow: 1, marginBottom: 0 }}
-      >
+      <Form.Item label="" name="content" style={{ flexGrow: 1, marginBottom: 0 }}>
         <TextArea
+          autoSize={{ minRows: 2, maxRows: 4 }}
           placeholder="Write your message"
           size="large"
-          autoSize={{ minRows: 2, maxRows: 4 }}
           onPressEnter={(event) => submitHandler(event.target?.value)}
         />
       </Form.Item>
-      <Form.Item
-        style={{ marginBottom: 0, display: "flex", alignItems: "center" }}
-      >
+      <Form.Item style={{ marginBottom: 0, display: "flex", alignItems: "center" }}>
         {sendMessage.isLoading ? (
-          <Button type="primary" style={{ marginBottom: 0 }}>
+          <Button style={{ marginBottom: 0 }} type="primary">
             <Spin />
           </Button>
         ) : (
           <Button
             htmlType="submit"
             icon={<SendOutlined />}
-            type="link"
             style={{ marginBottom: 0 }}
+            type="link"
           />
         )}
       </Form.Item>
-      {sendMessage.isError && (
-        <div style={{ color: "red" }}>Something failed</div>
-      )}
+      {sendMessage.isError && <div style={{ color: "red" }}>Something failed</div>}
     </CustomForm>
   );
 };

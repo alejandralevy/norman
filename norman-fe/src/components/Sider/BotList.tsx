@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import { useBots } from "../../services/bots";
-import CustomCollapse from "./CustomCollapse";
 import Bot from "../../types/Bot";
 import Loader from "../Common/Loader";
+
+import CustomCollapse from "./CustomCollapse";
 
 const BotList = ({
   selectedBot,

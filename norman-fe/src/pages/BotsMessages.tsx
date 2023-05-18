@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Bot from "../types/Bot";
-import ContentChat from "../components/Chat/ContentChat";
+import ContentChat from "../components/Chat/ChatMessages";
 import CreateNewChatButton from "../components/Sider/CreateNewChatButton";
 import BotList from "../components/Sider/BotList";
 

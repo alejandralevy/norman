@@ -6,7 +6,7 @@ import Bot from "../../types/Bot";
 import { useMessage, useMutateMessage } from "../../services/messages";
 import Message from "../../types/Message";
 
-import MessageBox from "./MessageBox";
+import MessageBox from "./MessageItem";
 import SubmitMessageForm from "./SubmitMessageForm";
 
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {

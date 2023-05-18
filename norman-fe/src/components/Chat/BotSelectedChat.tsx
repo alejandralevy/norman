@@ -7,9 +7,19 @@ import Message from "../../types/Message";
 
 import MessageBox from "./MessageBox";
 import SubmitMessageForm from "./SubmitMessageForm";
+import { useEffect, useRef } from "react";
 
 const BotSelectedChat = ({ bot }: { bot: Bot }) => {
   const messages = useMessage(bot.id);
+  const messagesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const divElement = messagesRef.current;
+    if (divElement) {
+      divElement.scrollTop = divElement.scrollHeight;
+    }
+  }, [bot, messages]);
+
   const { Title, Text } = Typography;
 
   if (messages.isLoading) {
@@ -35,7 +45,7 @@ const BotSelectedChat = ({ bot }: { bot: Bot }) => {
 
   return (
     <ChatPanel>
-      <MessagesContent>
+      <MessagesContent ref={messagesRef}>
         {messages.data.length
           ? messages.data.map((message: Message) => {
               return <MessageBox message={message} />;

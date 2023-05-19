@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Grid, Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
 import styled, { css, keyframes } from "styled-components";
 import { useState } from "react";
@@ -11,14 +11,19 @@ import BotList from "../components/Sider/BotList";
 const BotsMessages = () => {
   const [selectedBot, setSelectedBot] = useState<Bot>();
   const [collapsed, setCollapse] = useState(false);
+  const { useBreakpoint } = Grid;
+  const breakpoint = useBreakpoint();
+  console.log(breakpoint);
 
   return (
     <AppLayout hasSider>
       <AnimatedSider
-        width="300"
+        width={breakpoint.md ? "300px" : "100%"}
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapse}
+        breakpoint="md"
+        collapsedWidth="45"
       >
         {!collapsed && (
           <SiderContentWrapper>
@@ -40,16 +45,6 @@ const BotsMessages = () => {
 const AppLayout = styled(Layout)`
   height: 100vh;
   overflow: hidden;
-`;
-const slideAnimation = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 `;
 
 const AnimatedSider = styled(Sider)`
@@ -93,6 +88,5 @@ const AnimatedSider = styled(Sider)`
 const SiderContentWrapper = styled.div`
   height: 100%;
 `;
-
 
 export default BotsMessages;

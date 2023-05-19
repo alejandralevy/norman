@@ -38,7 +38,7 @@ const CustomCollapse = ({
         showArrow={false}
         onClick={selectBot}
       >
-        <EditBot bot={bot} onCancelEdit={editBot}/>
+        <EditBot bot={bot} onCancelEdit={editBot} />
       </CustomPanel>
     </Collapse>
   );

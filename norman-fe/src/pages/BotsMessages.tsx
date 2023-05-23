@@ -55,7 +55,7 @@ const BotsMessages = () => {
   return (
     <AppLayout hasSider>
       <AnimatedSider
-        collapsible
+        collapsible={!!!breakpoint.lg}
         breakpoint="md"
         collapsed={collapsed}
         collapsedWidth="45"
@@ -65,14 +65,14 @@ const BotsMessages = () => {
         {!collapsed && (
           <SiderContentWrapper>
             <BotsContainer>
-              <CreateNewChatButton selectBot={selectBot}/>
+              <CreateNewChatButton selectBot={selectBot} />
               <BotList
-               editBot={editBot}
-               editingBot={editingBot}
-               isDeleting={isDeleting}
-               selectBot={selectBot}
-               selectedBot={selectedBot}
-               onChangeIsDeleting={onChangeIsDeleting}
+                editBot={editBot}
+                editingBot={editingBot}
+                isDeleting={isDeleting}
+                selectBot={selectBot}
+                selectedBot={selectedBot}
+                onChangeIsDeleting={onChangeIsDeleting}
                 filter={filterInput}
               />
             </BotsContainer>

@@ -14,6 +14,39 @@ const BotsMessages = () => {
   const { useBreakpoint } = Grid;
   const breakpoint = useBreakpoint();
 
+  const [editingBot, setEditingBot] = useState<Bot>();
+  const [isDeleting, setIsDeleting] = useState<Bot>();
+
+  function editBot(bot: Bot) {
+    if (bot.id !== editingBot?.id) {
+      setEditingBot(bot);
+      setSelectedBot(bot);
+    } else if (bot.id === editingBot?.id) {
+      setEditingBot(undefined);
+    } else {
+      setEditingBot(bot);
+    }
+  }
+
+  function selectBot(bot: Bot) {
+    setSelectedBot(bot);
+    if (bot?.id !== editingBot?.id) {
+      setEditingBot(undefined);
+      setIsDeleting(undefined);
+    }
+  }
+
+  function onChangeIsDeleting(bot: Bot) {
+    if (bot.id === editingBot?.id) {
+      setEditingBot(undefined);
+    }
+    if (bot.id === isDeleting?.id || bot.id !== selectedBot?.id) {
+      setIsDeleting(undefined);
+    } else {
+      setIsDeleting(bot);
+    }
+  }
+
   return (
     <AppLayout hasSider>
       <AnimatedSider
@@ -26,8 +59,15 @@ const BotsMessages = () => {
       >
         {!collapsed && (
           <SiderContentWrapper>
-            <CreateNewChatButton setSelectedBot={setSelectedBot} />
-            <BotList selectedBot={selectedBot} setSelectedBot={setSelectedBot} />
+            <CreateNewChatButton selectBot={selectBot} />
+            <BotList
+              editBot={editBot}
+              editingBot={editingBot}
+              isDeleting={isDeleting}
+              selectBot={selectBot}
+              selectedBot={selectedBot}
+              onChangeIsDeleting={onChangeIsDeleting}
+            />
           </SiderContentWrapper>
         )}
       </AnimatedSider>

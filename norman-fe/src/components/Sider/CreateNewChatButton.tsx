@@ -7,7 +7,7 @@ import Bot from "../../types/Bot";
 
 import CreateBotForm from "./CreateBotForm";
 
-const CreateNewChatButton = ({ setSelectedBot }: { setSelectedBot: (bot: Bot) => void }) => {
+const CreateNewChatButton = ({ selectBot }: { selectBot: (bot: Bot) => void }) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ const CreateNewChatButton = ({ setSelectedBot }: { setSelectedBot: (bot: Bot) =>
           }
           showArrow={false}
         >
-          <CreateBotForm closeAction={() => setIsActive(false)} setSelectedBot={setSelectedBot} />
+          <CreateBotForm closeAction={() => setIsActive(false)} setSelectedBot={selectBot} />
         </CustomPanel>
       </Collapse>
     </>

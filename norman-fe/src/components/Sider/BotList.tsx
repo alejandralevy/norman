@@ -8,44 +8,20 @@ import CustomCollapse from "./CustomCollapse";
 
 const BotList = ({
   selectedBot,
-  setSelectedBot,
+  selectBot,
+  editBot,
+  editingBot,
+  isDeleting,
+  onChangeIsDeleting,
 }: {
-  selectedBot: any;
-  setSelectedBot: (bot: Bot) => void;
+  isDeleting: Bot | undefined;
+  editingBot: Bot | undefined;
+  editBot: (bot: Bot) => void;
+  selectedBot: Bot | undefined;
+  selectBot: (bot: Bot) => void;
+  onChangeIsDeleting: (bot: Bot) => void;
 }) => {
-  const [editingBot, setEditingBot] = useState<Bot>();
-  const [isDeleting, setIsDeleting] = useState<Bot>();
   const { data, isError, isLoading } = useBots();
-
-  function editBot(bot: Bot) {
-    if (bot.id !== editingBot?.id) {
-      setEditingBot(bot);
-      setSelectedBot(bot);
-    } else if (bot.id === editingBot?.id) {
-      setEditingBot(undefined);
-    } else {
-      setEditingBot(bot);
-    }
-  }
-
-  function selectBot(bot: Bot) {
-    setSelectedBot(bot);
-    if (bot?.id !== editingBot?.id) {
-      setEditingBot(undefined);
-      setIsDeleting(undefined);
-    }
-  }
-
-  function onChangeIsDeleting(bot: Bot) {
-    if (bot.id === editingBot?.id) {
-      setEditingBot(undefined);
-    }
-    if (bot.id === isDeleting?.id || bot.id !== selectedBot?.id) {
-      setIsDeleting(undefined);
-    } else {
-      setIsDeleting(bot);
-    }
-  }
 
   if (isError) {
     return <>Error</>;

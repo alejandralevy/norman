@@ -1,9 +1,21 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
-const CollapseButtons = ({ edit }: { edit: () => void }) => {
+const CollapseButtons = ({
+  edit,
+  setIsDeleting,
+}: {
+  edit: () => void;
+  setIsDeleting: () => void;
+}) => {
   return (
     <>
-      <DeleteOutlined style={{ fontSize: "16px", marginRight: 8 }} />
+      <DeleteOutlined
+        style={{ fontSize: "16px", marginRight: 8 }}
+        onClick={(event) => {
+          event.stopPropagation();
+          setIsDeleting();
+        }}
+      />
       <EditOutlined
         style={{ fontSize: "16px" }}
         onClick={(event) => {

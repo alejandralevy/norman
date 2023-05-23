@@ -5,6 +5,7 @@ import Bot from "../../types/Bot";
 
 import CollapseButtons from "./CollapseButtons";
 import EditBot from "./EditBotForm";
+import CollapseDeleteButtons from "./CollapseDeleteButtons";
 
 const CustomCollapse = ({
   bot,
@@ -12,12 +13,16 @@ const CustomCollapse = ({
   selectBot,
   editBot,
   isSelected = false,
+  isDeleting = false,
+  setIsDeleting,
 }: {
   bot: Bot;
   editingBot?: string;
   selectBot: () => void;
   editBot: () => void;
   isSelected: boolean;
+  isDeleting: boolean;
+  setIsDeleting: () => void;
 }) => {
   return (
     <Collapse
@@ -33,8 +38,15 @@ const CustomCollapse = ({
         key={bot.id}
         $isSelected={isSelected}
         collapsible="icon"
-        extra={isSelected && <CollapseButtons edit={editBot} />}
-        header={bot.name}
+        extra={
+          isSelected &&
+          (isDeleting ? (
+            <CollapseDeleteButtons bot={bot} setIsDeleting={() => setIsDeleting()} />
+          ) : (
+            <CollapseButtons edit={editBot} setIsDeleting={() => setIsDeleting()} />
+          ))
+        }
+        header={isDeleting ? `Delete: ${bot.name}?` : bot.name}
         showArrow={false}
         onClick={selectBot}
       >
@@ -51,8 +63,7 @@ interface CustomPanelProps {
 
 const CustomPanel = styled(Collapse.Panel)<CustomPanelProps>`
   margin-bottom: 1rem;
-  ${(props: CustomPanelProps) =>
-    props.$isSelected ? `background: #141414` : ""};
+  ${(props: CustomPanelProps) => (props.$isSelected ? `background: #141414` : "")};
   border: none;
   &:hover,
   &:focus {

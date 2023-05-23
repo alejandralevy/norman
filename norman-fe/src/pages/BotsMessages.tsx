@@ -19,24 +19,60 @@ const BotsMessages = () => {
   const onFilter = (e: any) => {
     setFilterInput(e.target?.value);
   };
+  const [editingBot, setEditingBot] = useState<Bot>();
+  const [isDeleting, setIsDeleting] = useState<Bot>();
+
+  function editBot(bot: Bot) {
+    if (bot.id !== editingBot?.id) {
+      setEditingBot(bot);
+      setSelectedBot(bot);
+    } else if (bot.id === editingBot?.id) {
+      setEditingBot(undefined);
+    } else {
+      setEditingBot(bot);
+    }
+  }
+
+  function selectBot(bot: Bot) {
+    setSelectedBot(bot);
+    if (bot?.id !== editingBot?.id) {
+      setEditingBot(undefined);
+      setIsDeleting(undefined);
+    }
+  }
+
+  function onChangeIsDeleting(bot: Bot) {
+    if (bot.id === editingBot?.id) {
+      setEditingBot(undefined);
+    }
+    if (bot.id === isDeleting?.id || bot.id !== selectedBot?.id) {
+      setIsDeleting(undefined);
+    } else {
+      setIsDeleting(bot);
+    }
+  }
 
   return (
     <AppLayout hasSider>
       <AnimatedSider
-        width={breakpoint.md ? "300px" : "100%"}
         collapsible
-        collapsed={collapsed}
-        onCollapse={setCollapse}
         breakpoint="md"
+        collapsed={collapsed}
         collapsedWidth="45"
+        width={breakpoint.md ? "300px" : "100%"}
+        onCollapse={setCollapse}
       >
         {!collapsed && (
           <SiderContentWrapper>
             <BotsContainer>
-              <CreateNewChatButton />
+              <CreateNewChatButton selectBot={selectBot}/>
               <BotList
-                selectedBot={selectedBot}
-                setSelectedBot={setSelectedBot}
+               editBot={editBot}
+               editingBot={editingBot}
+               isDeleting={isDeleting}
+               selectBot={selectBot}
+               selectedBot={selectedBot}
+               onChangeIsDeleting={onChangeIsDeleting}
                 filter={filterInput}
               />
             </BotsContainer>
@@ -67,8 +103,7 @@ const AnimatedSider = styled(Sider)`
   ${({ collapsed }) =>
     css`
       .ant-layout-sider-children {
-        animation: ${collapsed ? "slideOut" : "slideIn"} 0.3s ease-in-out
-          forwards;
+        animation: ${collapsed ? "slideOut" : "slideIn"} 0.3s ease-in-out forwards;
         opacity: ${collapsed ? 0 : 1};
         transform: translateX(${collapsed ? "-100%" : "0"});
       }

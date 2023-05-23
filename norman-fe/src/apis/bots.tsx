@@ -15,3 +15,9 @@ export const createBot = async (bot: Bot) => {
 
   return data;
 };
+
+export const deleteBot = async (bot: Bot) => {
+  const { data } = await axios.delete(`${API_URL}/api/bots/${bot.id}`);
+
+  return data;
+};

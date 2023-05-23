@@ -3,9 +3,11 @@ import { Button, Collapse } from "antd";
 import { styled } from "styled-components";
 import { useState } from "react";
 
+import Bot from "../../types/Bot";
+
 import CreateBotForm from "./CreateBotForm";
 
-const CreateNewChatButton = () => {
+const CreateNewChatButton = ({ selectBot }: { selectBot: (bot: Bot) => void }) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -37,7 +39,7 @@ const CreateNewChatButton = () => {
           }
           showArrow={false}
         >
-          <CreateBotForm closeAction={() => setIsActive(false)} />
+          <CreateBotForm closeAction={() => setIsActive(false)} setSelectedBot={selectBot} />
         </CustomPanel>
       </Collapse>
     </>

@@ -1,6 +1,6 @@
 import TextArea from "antd/es/input/TextArea";
 import React, { useState } from "react";
-import { Button, Form, Spin } from "antd";
+import { Button, Form } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
 import Loader from "../Common/Loader";
@@ -23,7 +23,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
     });
   }
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && e.shiftKey) {
       const updatedMessage = message + "\n";
       setMessage(updatedMessage);
@@ -47,9 +47,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onPressEnter={handleKeyDown}
-        >
-          alskalsk
-        </TextArea>
+        />
       </Form.Item>
       <Form.Item
         style={{ marginBottom: 0, display: "flex", alignItems: "center" }}

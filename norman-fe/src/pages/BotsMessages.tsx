@@ -1,19 +1,24 @@
 import { Grid, Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 import { useState } from "react";
 
 import Bot from "../types/Bot";
 import ContentChat from "../components/Chat/ChatMessages";
 import CreateNewChatButton from "../components/Sider/CreateNewChatButton";
 import BotList from "../components/Sider/BotList";
+import FilterInput from "../components/Sider/FilterInput";
 
 const BotsMessages = () => {
   const [selectedBot, setSelectedBot] = useState<Bot>();
+  const [filterInput, setFilterInput] = useState("");
   const [collapsed, setCollapse] = useState(false);
   const { useBreakpoint } = Grid;
   const breakpoint = useBreakpoint();
-  console.log(breakpoint);
+
+  const onFilter = (e: any) => {
+    setFilterInput(e.target?.value);
+  };
 
   return (
     <AppLayout hasSider>
@@ -27,11 +32,15 @@ const BotsMessages = () => {
       >
         {!collapsed && (
           <SiderContentWrapper>
-            <CreateNewChatButton />
-            <BotList
-              selectedBot={selectedBot}
-              setSelectedBot={setSelectedBot}
-            />
+            <BotsContainer>
+              <CreateNewChatButton />
+              <BotList
+                selectedBot={selectedBot}
+                setSelectedBot={setSelectedBot}
+                filter={filterInput}
+              />
+            </BotsContainer>
+            <FilterInput value={filterInput} onFilter={onFilter} />
           </SiderContentWrapper>
         )}
       </AnimatedSider>
@@ -89,7 +98,17 @@ const AnimatedSider = styled(Sider)`
 `;
 
 const SiderContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 12px;
   height: 100%;
+`;
+
+const BotsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
 `;
 
 export default BotsMessages;

@@ -14,7 +14,7 @@ const BotsMessages = () => {
   return (
     <AppLayout hasSider>
       <Sider width="300">
-        <CreateNewChatButton />
+        <CreateNewChatButton setSelectedBot={setSelectedBot} />
         <BotList selectedBot={selectedBot} setSelectedBot={setSelectedBot} />
       </Sider>
       <Layout>

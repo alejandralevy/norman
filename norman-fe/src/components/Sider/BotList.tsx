@@ -14,7 +14,7 @@ const BotList = ({
   setSelectedBot: (bot: Bot) => void;
 }) => {
   const [editingBot, setEditingBot] = useState<Bot>();
-
+  const [isDeleting, setIsDeleting] = useState<Bot>();
   const { data, isError, isLoading } = useBots();
 
   function editBot(bot: Bot) {
@@ -32,6 +32,18 @@ const BotList = ({
     setSelectedBot(bot);
     if (bot?.id !== editingBot?.id) {
       setEditingBot(undefined);
+      setIsDeleting(undefined);
+    }
+  }
+
+  function onChangeIsDeleting(bot: Bot) {
+    if (bot.id === editingBot?.id) {
+      setEditingBot(undefined);
+    }
+    if (bot.id === isDeleting?.id || bot.id !== selectedBot?.id) {
+      setIsDeleting(undefined);
+    } else {
+      setIsDeleting(bot);
     }
   }
 
@@ -58,8 +70,10 @@ const BotList = ({
           bot={bot}
           editBot={() => editBot(bot)}
           editingBot={editingBot?.id}
+          isDeleting={isDeleting?.id === bot.id}
           isSelected={selectedBot?.id === bot.id}
           selectBot={() => selectBot(bot)}
+          setIsDeleting={() => onChangeIsDeleting(bot)}
         />
       ))}
     </div>

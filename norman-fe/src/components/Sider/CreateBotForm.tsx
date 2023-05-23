@@ -3,15 +3,23 @@ import { Button, Form, Input, Select, Spin } from "antd";
 import { styled } from "styled-components";
 
 import { useMutateBots } from "../../services/bots";
+import Bot from "../../types/Bot";
 
-const CreateBotForm = ({ closeAction }: { closeAction: () => void }) => {
-  const { mutate, isError, isLoading } = useMutateBots();
+const CreateBotForm = ({
+  closeAction,
+  setSelectedBot,
+}: {
+  closeAction: () => void;
+  setSelectedBot: (bot: Bot) => void;
+}) => {
+  const { mutate, isLoading } = useMutateBots();
   const [form] = Form.useForm();
 
   function submitHandler(newBot: any) {
     mutate(newBot, {
-      onSuccess: () => {
+      onSuccess: (bot) => {
         closeAndReset();
+        setSelectedBot(bot);
       },
     });
   }
@@ -31,9 +39,9 @@ const CreateBotForm = ({ closeAction }: { closeAction: () => void }) => {
       <Form
         autoComplete="off"
         form={form}
-        layout="vertical"
         initialValues={{ remember: true }}
         labelCol={{ span: 8 }}
+        layout="vertical"
         name="basic"
         onFinish={submitHandler}
       >

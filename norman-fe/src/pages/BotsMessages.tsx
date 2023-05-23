@@ -50,6 +50,9 @@ const AppLayout = styled(Layout)`
 const AnimatedSider = styled(Sider)`
   .ant-layout-sider-children {
     overflow: hidden;
+    '&: ant-layout-sider-trigger: {
+      background-color: red;
+    }
   }
 
   ${({ collapsed }) =>

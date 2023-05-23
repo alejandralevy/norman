@@ -26,7 +26,11 @@ const CreateNewChatButton = () => {
           $isActive={isActive}
           header={
             <Box $isActive={isActive}>
-              <Button icon={<PlusOutlined />} type="primary">
+              <Button
+                icon={<PlusOutlined />}
+                type="primary"
+                style={{ height: "40px" }}
+              >
                 New chat
               </Button>
             </Box>

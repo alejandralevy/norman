@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface LoaderProps {
-  text: string;
+  text?: string;
 }
 
 const Loader: React.FC<LoaderProps> = ({ text }) => {

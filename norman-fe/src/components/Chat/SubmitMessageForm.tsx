@@ -60,7 +60,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ sendMessage, form
 
 const CustomForm = styled(Form)`
   width: 100%;
-  padding: 4px 32px 32px 32px;
+  padding: 4px 32px 16px 32px;
   display: flex;
   flex-direction: row;
   column-gap: 1rem;

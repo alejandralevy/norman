@@ -55,10 +55,10 @@ const BotsMessages = () => {
   return (
     <AppLayout hasSider>
       <AnimatedSider
-        collapsible
         breakpoint="md"
         collapsed={collapsed}
         collapsedWidth="45"
+        collapsible={!!!breakpoint.lg}
         width={breakpoint.md ? "300px" : "100%"}
         onCollapse={setCollapse}
       >

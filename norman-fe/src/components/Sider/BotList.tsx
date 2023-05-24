@@ -13,7 +13,7 @@ const BotList = ({
   editingBot,
   isDeleting,
   onChangeIsDeleting,
-  filter
+  filter,
 }: {
   isDeleting: Bot | undefined;
   editingBot: Bot | undefined;
@@ -43,15 +43,14 @@ const BotList = ({
       {filteredBots &&
         filteredBots.map((bot: Bot) => (
           <CustomCollapse
-          key={bot.id}
-          bot={bot}
-          editBot={() => editBot(bot)}
-          editingBot={editingBot?.id}
-          isDeleting={isDeleting?.id === bot.id}
-          isSelected={selectedBot?.id === bot.id}
-          selectBot={() => selectBot(bot)}
-          setIsDeleting={() => onChangeIsDeleting(bot)}
-            
+            key={bot.id}
+            bot={bot}
+            editBot={() => editBot(bot)}
+            editingBot={editingBot?.id}
+            isDeleting={isDeleting?.id === bot.id}
+            isSelected={selectedBot?.id === bot.id}
+            selectBot={() => selectBot(bot)}
+            setIsDeleting={() => onChangeIsDeleting(bot)}
           />
         ))}
     </div>

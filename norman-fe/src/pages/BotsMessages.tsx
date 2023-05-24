@@ -65,15 +65,15 @@ const BotsMessages = () => {
         {!collapsed && (
           <SiderContentWrapper>
             <BotsContainer>
-              <CreateNewChatButton selectBot={selectBot}/>
+              <CreateNewChatButton selectBot={selectBot} />
               <BotList
-               editBot={editBot}
-               editingBot={editingBot}
-               isDeleting={isDeleting}
-               selectBot={selectBot}
-               selectedBot={selectedBot}
-               onChangeIsDeleting={onChangeIsDeleting}
+                editBot={editBot}
+                editingBot={editingBot}
                 filter={filterInput}
+                isDeleting={isDeleting}
+                selectBot={selectBot}
+                selectedBot={selectedBot}
+                onChangeIsDeleting={onChangeIsDeleting}
               />
             </BotsContainer>
             <FilterInput value={filterInput} onFilter={onFilter} />
@@ -95,7 +95,7 @@ const AppLayout = styled(Layout)`
 const AnimatedSider = styled(Sider)`
   .ant-layout-sider-children {
     overflow: hidden;
-    '&: ant-layout-sider-trigger: {
+    &.ant-layout-sider-trigger {
       background-color: red;
     }
   }

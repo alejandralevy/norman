@@ -67,7 +67,7 @@ const CustomPanel = styled(Collapse.Panel)<CustomPanelProps>`
   border: none;
   &:hover,
   &:focus {
-    background: #141414};
+    background: #141414;
   }
 `;
 

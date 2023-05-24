@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Form } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { styled } from "styled-components";
+
 import Loader from "../Common/Loader";
 
 interface SubmitMessageFormProps {
@@ -10,11 +11,9 @@ interface SubmitMessageFormProps {
   form: any;
 }
 
-const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
-  sendMessage,
-  form,
-}) => {
+const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({ sendMessage, form }) => {
   const [message, setMessage] = useState("");
+
   function submitHandler(message: any) {
     sendMessage.mutate(message.content, {
       onSuccess: () => {
@@ -26,6 +25,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter" && e.shiftKey) {
       const updatedMessage = message + "\n";
+
       setMessage(updatedMessage);
     } else {
       form.submit();
@@ -34,11 +34,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
 
   return (
     <CustomForm form={form} onFinish={submitHandler}>
-      <Form.Item
-        label=""
-        name="content"
-        style={{ flexGrow: 1, marginBottom: 0 }}
-      >
+      <Form.Item label="" name="content" style={{ flexGrow: 1, marginBottom: 0 }}>
         <TextArea
           autoSize={{ minRows: 2, maxRows: 4 }}
           disabled={sendMessage.isLoading}
@@ -49,9 +45,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
           onPressEnter={handleKeyDown}
         />
       </Form.Item>
-      <Form.Item
-        style={{ marginBottom: 0, display: "flex", alignItems: "center" }}
-      >
+      <Form.Item style={{ marginBottom: 0, display: "flex", alignItems: "center" }}>
         <Button
           htmlType="submit"
           icon={sendMessage.isLoading ? <Loader /> : <SendOutlined />}
@@ -59,9 +53,7 @@ const SubmitMessageForm: React.FC<SubmitMessageFormProps> = ({
           type="link"
         />
       </Form.Item>
-      {sendMessage.isError && (
-        <div style={{ color: "red" }}>Something failed</div>
-      )}
+      {sendMessage.isError && <div style={{ color: "red" }}>Something failed</div>}
     </CustomForm>
   );
 };

@@ -28,11 +28,7 @@ const CreateNewChatButton = ({ selectBot }: { selectBot: (bot: Bot) => void }) =
           $isActive={isActive}
           header={
             <Box $isActive={isActive}>
-              <Button
-                icon={<PlusOutlined />}
-                type="primary"
-                style={{ height: "40px" }}
-              >
+              <Button icon={<PlusOutlined />} style={{ height: "40px" }} type="primary">
                 New chat
               </Button>
             </Box>
